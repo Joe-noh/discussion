@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
   before_save :ensure_auth_token
 
-  devise :database_authenticatable, :registerable
+  devise :database_authenticatable, :registerable, :validatable
+
+#  validates :email, presence: true
 
   def ensure_auth_token
     self.authentication_token = generate_auth_token if authentication_token.blank?
