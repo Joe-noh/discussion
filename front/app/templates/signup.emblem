@@ -1,0 +1,8 @@
+form submit='signup'
+  = input id='identification' placeholder='Email' value=identification
+  br
+  = input id='password' placeholder='Password' type='password' value=password
+  br
+  = input id='password' placeholder='Confirmation' type='password' value=password_confirmation
+  br
+  button type='submit' Sign up

@@ -1,6 +1,6 @@
 form submit="authenticate"
   = input id="identification" placeholder="Email" value=identification
   br
-  = input id="password" placeholder="Password" value=password
+  = input id="password" placeholder="Password" type="password" value=password
   br
   button type="submit" Login
