@@ -3,6 +3,6 @@ form submit='signup'
   br
   = input id='password' placeholder='Password' type='password' value=password
   br
-  = input id='password' placeholder='Confirmation' type='password' value=password_confirmation
+  = input id='password_confirmation' placeholder='Confirmation' type='password' value=password_confirmation
   br
   button type='submit' Sign up
