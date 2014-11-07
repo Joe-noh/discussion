@@ -1,30 +1,29 @@
 `import Ember from 'ember'`
+`import { request } from 'ic-ajax'`
 
 SignupController = Ember.Controller.extend
+  needs: ['login']
   actions:
     signup: ->
-      data = {}
-      data['user'] =
+      user =
         email:    @get('identification')
         password: @get('password')
         password_confirmation: @get('password_confirmation')
 
-      params =
-        url:  '/users'
+      request '/users',
         type: 'POST'
-        data: data
+        data: user: user
         dataType: 'json'
-        beforeSend: (xhr, settings) ->
-          xhr.setRequestHeader 'Accept', settings.accepts.json
-
-      new Ember.RSVP.Promise (resolve, reject) ->
-        Ember.$.ajax params
-        .then (response) ->
-          Ember.run ->
-            resolve response
-        , (xhr, status, error) ->
-          Ember.run ->
-            reject(xhr.responseJSON || xhr.responseText)
-
+      .then (response) =>
+        if response['success']
+          console.log 'Signed up!'
+          @get 'controllers.login'
+          .get 'session'
+          .authenticate 'simple-auth-authenticator:devise',
+            identification: user['email']
+            password:       user['password']
+          @transitionToRoute 'application'
+        else
+          console.log 'Oops!'
 
 `export default SignupController`

@@ -1,4 +1,10 @@
 h1 Top
+if session.isAuthenticated
+  button{action 'invalidateSession'} Logout
+else
+  p
+    link-to 'login' | Login
+    link-to 'signup' | Signup
 hr
 
 div#content
